@@ -261,10 +261,7 @@ actor PowerBIService {
     }
 
     private func getList<T: Decodable>(_ path: String, token: String) async throws -> [T] {
-        let trimmed = path.trimmingCharacters(in: CharacterSet(charactersIn: "/"))
-        guard let url = URL(string: trimmed, relativeTo: baseURL)?.absoluteURL else {
-            throw PowerBIError.invalidResponse
-        }
+        let url = apiURL(for: path)
         var request = URLRequest(url: url)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
 
@@ -288,6 +285,17 @@ actor PowerBIService {
         isoFormatter.formatOptions = [.withInternetDateTime]
         defer { isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds] }
         return isoFormatter.date(from: value)
+    }
+
+    private func apiURL(for path: String) -> URL {
+        let components = path
+            .trimmingCharacters(in: CharacterSet(charactersIn: "/"))
+            .split(separator: "/")
+            .map(String.init)
+
+        return components.reduce(baseURL) { url, component in
+            url.appendingPathComponent(component)
+        }
     }
 }
 
