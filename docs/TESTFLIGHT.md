@@ -19,27 +19,14 @@
 
 ## Build & upload
 
+**Fastest path:** open the project in Xcode, then **Product → Archive → Distribute App → App Store Connect**.
+
+Or run the helper script (after selecting a Team in Xcode):
+
 ```bash
-cd /Users/paulrendleman/Desktop/AQDataPulse
-
-# Archive for release
-xcodebuild \
-  -scheme AQDataPulse \
-  -project AQDataPulse.xcodeproj \
-  -configuration Release \
-  -destination 'generic/platform=iOS' \
-  -archivePath build/AQDataPulse.xcarchive \
-  archive
-
-# Upload to App Store Connect
-xcodebuild \
-  -exportArchive \
-  -archivePath build/AQDataPulse.xcarchive \
-  -exportOptionsPlist ExportOptions.plist \
-  -exportPath build/export
+chmod +x scripts/upload-testflight.sh
+./scripts/upload-testflight.sh
 ```
-
-Or in Xcode: **Product → Archive**, then **Distribute App → App Store Connect**.
 
 ## Screenshots
 
@@ -48,7 +35,7 @@ chmod +x scripts/capture-screenshots.sh
 ./scripts/capture-screenshots.sh "iPhone 17 Pro"
 ```
 
-Upload PNGs from `AppStoreScreenshots/` to App Store Connect. Capture additional sizes if required (6.7", 6.5", iPad).
+Upload PNGs from `AppStoreScreenshots/appstore-6.5/`. Paste-ready metadata: [APP_STORE_COPY.md](APP_STORE_COPY.md). Privacy policy HTML: [privacy-policy.html](privacy-policy.html).
 
 ## TestFlight
 
@@ -57,13 +44,15 @@ Upload PNGs from `AppStoreScreenshots/` to App Store Connect. Capture additional
 3. Add internal testers (your team) or external testers.
 4. Submit export compliance: select **No** for encryption if you only use standard HTTPS.
 
-## Version 1 review notes
+## Version 1.1 review notes
 
 Tell App Review:
 
-- The app uses **demo data only**; no login is required.
-- **Connect Microsoft** is optional scaffolding for a future release.
+- **Demo mode** when signed out (sample workspaces and alerts).
+- **Connect Microsoft** is optional; when used, live Power BI workspace data is shown.
+- Microsoft sign-in uses standard OAuth; tokens stored in Keychain only.
 - Beta signup opens the user’s Mail app; no in-app account is created.
+- Export compliance: **No** custom encryption (HTTPS only).
 
 ## Before each release
 

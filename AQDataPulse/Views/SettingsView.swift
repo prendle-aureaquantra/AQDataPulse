@@ -107,23 +107,23 @@ struct PrivacyPolicyView: View {
                     Group {
                         policySection(
                             title: "Overview",
-                            body: "AQ Data Pulse Version 1 operates entirely on your device using demonstration data. No personal data is collected, stored, or transmitted."
+                            body: "AQ Data Pulse monitors Microsoft Fabric and Power BI refresh health. In demo mode, sample data stays on your device. Optional Microsoft sign-in loads live workspace data using Microsoft APIs."
+                        )
+                        policySection(
+                            title: "Microsoft Sign-In",
+                            body: "If you connect Microsoft, OAuth tokens are stored in your device Keychain. The app reads workspace and refresh metadata from Power BI. We do not operate a separate backend for your Fabric data."
                         )
                         policySection(
                             title: "Data Collection",
-                            body: "This app does not collect analytics, usage data, or personal information. Beta signup requests are handled through your device's email client and are not processed by the app."
+                            body: "We do not use advertising or analytics SDKs. Beta and support requests open your Mail app and are not processed inside the app."
                         )
                         policySection(
                             title: "Demo Mode",
-                            body: "All workspace, model, and alert data displayed in Version 1 is sample data for demonstration purposes only."
-                        )
-                        policySection(
-                            title: "Future Versions",
-                            body: "When Microsoft Fabric integration is added, this policy will be updated to describe authentication, data handling, and retention practices."
+                            body: "When signed out, all workspace, model, and alert data is sample data for demonstration only."
                         )
                         policySection(
                             title: "Contact",
-                            body: "For privacy questions, contact therendle@gmail.com."
+                            body: "Privacy questions: therendle@gmail.com. Full policy: see App Store listing or aureaquantra.com."
                         )
                     }
                 }
