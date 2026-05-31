@@ -163,7 +163,10 @@ final class MicrosoftAuthService: NSObject, ObservableObject {
             try KeychainStore.save(refreshToken, account: KeychainStore.Accounts.refreshToken)
         }
 
-        let profile = try await fetchProfile(accessToken: tokenResponse.accessToken)
+        let profile = profileFromIDToken(tokenResponse.idToken) ?? UserProfile(
+            displayName: "Microsoft Account",
+            email: "Signed in"
+        )
         try KeychainStore.save(profile.displayName, account: KeychainStore.Accounts.displayName)
         try KeychainStore.save(profile.email, account: KeychainStore.Accounts.email)
 
@@ -171,20 +174,40 @@ final class MicrosoftAuthService: NSObject, ObservableObject {
         codeVerifier = nil
     }
 
-    private func fetchProfile(accessToken: String) async throws -> UserProfile {
-        var request = URLRequest(url: URL(string: "https://graph.microsoft.com/v1.0/me")!)
-        request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+    private func profileFromIDToken(_ idToken: String?) -> UserProfile? {
+        guard let claims = Self.decodeJWTPayload(idToken) else { return nil }
 
-        let (data, response) = try await URLSession.shared.data(for: request)
-        guard let http = response as? HTTPURLResponse, (200..<300).contains(http.statusCode) else {
-            throw MicrosoftAuthError.server("Unable to load Microsoft profile.")
+        let email = (claims["email"] as? String)
+            ?? (claims["preferred_username"] as? String)
+            ?? (claims["upn"] as? String)
+
+        let displayName = (claims["name"] as? String) ?? email
+
+        guard displayName != nil || email != nil else { return nil }
+
+        return UserProfile(
+            displayName: displayName ?? email ?? "Microsoft Account",
+            email: email ?? displayName ?? "Signed in"
+        )
+    }
+
+    private static func decodeJWTPayload(_ jwt: String?) -> [String: Any]? {
+        guard let jwt else { return nil }
+        let parts = jwt.split(separator: ".")
+        guard parts.count >= 2 else { return nil }
+
+        var base64 = String(parts[1])
+            .replacingOccurrences(of: "-", with: "+")
+            .replacingOccurrences(of: "_", with: "/")
+        while base64.count % 4 != 0 {
+            base64.append("=")
         }
 
-        let graphUser = try JSONDecoder().decode(GraphUser.self, from: data)
-        return UserProfile(
-            displayName: graphUser.displayName ?? graphUser.userPrincipalName ?? "Microsoft Account",
-            email: graphUser.mail ?? graphUser.userPrincipalName ?? "Unknown"
-        )
+        guard let data = Data(base64Encoded: base64),
+              let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            return nil
+        }
+        return json
     }
 
     private static func randomURLSafeString(length: Int) -> String {
@@ -218,17 +241,13 @@ extension MicrosoftAuthService: ASWebAuthenticationPresentationContextProviding 
 private struct TokenResponse: Decodable {
     let accessToken: String
     let refreshToken: String?
+    let idToken: String?
 
     enum CodingKeys: String, CodingKey {
         case accessToken = "access_token"
         case refreshToken = "refresh_token"
+        case idToken = "id_token"
     }
-}
-
-private struct GraphUser: Decodable {
-    let displayName: String?
-    let mail: String?
-    let userPrincipalName: String?
 }
 
 private struct UserProfile {

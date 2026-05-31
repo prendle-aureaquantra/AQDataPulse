@@ -13,14 +13,40 @@ AQ Data Pulse uses the Microsoft identity platform with PKCE (`ASWebAuthenticati
 
 ## 2. Configure API permissions
 
-Add delegated permissions:
+The app requests `https://analysis.windows.net/powerbi/api/.default` at sign-in, which includes **every delegated Power BI permission you enable below**. Add only what you need.
 
-- `openid`
-- `profile`
-- `offline_access`
-- `Dataset.Read.All` or Power BI Service permissions as needed for v2
+### Microsoft Graph (delegated)
 
-Grant admin consent if your tenant requires it.
+| Permission | Why |
+|------------|-----|
+| `openid` | Sign-in |
+| `profile` | Display name in Settings |
+| `offline_access` | Refresh tokens for background sync (v2) |
+| `User.Read` | Load profile from Microsoft Graph |
+
+### Power BI Service / Fabric (delegated) — **add these**
+
+| Permission | Why |
+|------------|-----|
+| **Workspace.Read.All** | List workspaces (matches Workspaces tab) |
+| **SemanticModel.Read.All** | Read semantic models in Fabric |
+| **Dataset.Read.All** | Refresh history via Power BI REST (`/datasets/.../refreshes`) |
+| **Item.Read.All** | Read Fabric items across workspaces |
+| **ItemMetadata.Read.All** | Item metadata without write access |
+
+### Optional (add later if needed)
+
+| Permission | When | Admin consent |
+|------------|------|---------------|
+| **Tenant.Read.All** | Monitor entire tenant, not just workspaces the user already sees | **Yes** |
+| **Report.Read.All** | Surface report-level health | No |
+| **Dashboard.Read.All** | Surface dashboard health | No |
+
+### Do **not** add for AQ Data Pulse
+
+Skip every **ReadWrite.All** permission (Dataset, Workspace, SemanticModel, Item, etc.). This app is read-only monitoring — write scopes are unnecessary and make admin review harder.
+
+After adding permissions, click **Grant admin consent for [your org]** if `Tenant.Read.All` or your tenant policy requires it.
 
 ## 3. Update the iOS app
 

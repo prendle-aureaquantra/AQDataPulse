@@ -34,7 +34,7 @@
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.business</string>
 	<key>MicrosoftClientID</key>
-	<string>YOUR_AZURE_CLIENT_ID</string>
+	<string>32cba286-b06f-47fe-8037-32aefcac04ea</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
