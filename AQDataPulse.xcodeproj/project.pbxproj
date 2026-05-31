@@ -1,0 +1,392 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A10000010000000100000001 /* AQDataPulseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000100000001 /* AQDataPulseApp.swift */; };
+		A10000010000000100000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000100000002 /* ContentView.swift */; };
+		A10000010000000100000003 /* HealthStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000100000003 /* HealthStatus.swift */; };
+		A10000010000000100000004 /* DataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000100000004 /* DataModels.swift */; };
+		A10000010000000100000005 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000100000005 /* AppViewModel.swift */; };
+		A10000010000000100000006 /* MockDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000100000006 /* MockDataService.swift */; };
+		A10000010000000100000007 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000100000007 /* Components.swift */; };
+		A10000010000000100000008 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000100000008 /* DashboardView.swift */; };
+		A10000010000000100000009 /* WorkspacesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000100000009 /* WorkspacesView.swift */; };
+		A1000001000000010000000A /* AlertsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000001000000010000000A /* AlertsView.swift */; };
+		A1000001000000010000000B /* ModelDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000001000000010000000B /* ModelDetailView.swift */; };
+		A1000001000000010000000C /* PricingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000001000000010000000C /* PricingView.swift */; };
+		A1000001000000010000000D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000001000000010000000D /* SettingsView.swift */; };
+		A1000001000000010000000E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2000001000000010000000E /* Assets.xcassets */; };
+		B10000010000000100000001 /* ConnectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000010000000100000001 /* ConnectionState.swift */; };
+		B10000010000000100000002 /* MicrosoftAuthConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000010000000100000002 /* MicrosoftAuthConfig.swift */; };
+		B10000010000000100000003 /* KeychainStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000010000000100000003 /* KeychainStore.swift */; };
+		B10000010000000100000004 /* MicrosoftAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000010000000100000004 /* MicrosoftAuthService.swift */; };
+		B10000010000000100000005 /* ConnectMicrosoftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000010000000100000005 /* ConnectMicrosoftView.swift */; };
+		B10000010000000100000006 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000010000000100000006 /* AppInfo.swift */; };
+		B10000010000000100000007 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B20000010000000100000007 /* PrivacyInfo.xcprivacy */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A20000010000000100000001 /* AQDataPulseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AQDataPulseApp.swift; sourceTree = "<group>"; };
+		A20000010000000100000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A20000010000000100000003 /* HealthStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthStatus.swift; sourceTree = "<group>"; };
+		A20000010000000100000004 /* DataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModels.swift; sourceTree = "<group>"; };
+		A20000010000000100000005 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
+		A20000010000000100000006 /* MockDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataService.swift; sourceTree = "<group>"; };
+		A20000010000000100000007 /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
+		A20000010000000100000008 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		A20000010000000100000009 /* WorkspacesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspacesView.swift; sourceTree = "<group>"; };
+		A2000001000000010000000A /* AlertsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsView.swift; sourceTree = "<group>"; };
+		A2000001000000010000000B /* ModelDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelDetailView.swift; sourceTree = "<group>"; };
+		A2000001000000010000000C /* PricingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricingView.swift; sourceTree = "<group>"; };
+		A2000001000000010000000D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A2000001000000010000000E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A2000001000000010000000F /* AQDataPulse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AQDataPulse.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B20000010000000100000001 /* ConnectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionState.swift; sourceTree = "<group>"; };
+		B20000010000000100000002 /* MicrosoftAuthConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicrosoftAuthConfig.swift; sourceTree = "<group>"; };
+		B20000010000000100000003 /* KeychainStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStore.swift; sourceTree = "<group>"; };
+		B20000010000000100000004 /* MicrosoftAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicrosoftAuthService.swift; sourceTree = "<group>"; };
+		B20000010000000100000005 /* ConnectMicrosoftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectMicrosoftView.swift; sourceTree = "<group>"; };
+		B20000010000000100000006 /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
+		B20000010000000100000007 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		B20000010000000100000008 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A30000010000000100000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A40000010000000100000001 = {
+			isa = PBXGroup;
+			children = (
+				A40000010000000100000002 /* AQDataPulse */,
+				A40000010000000100000003 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A40000010000000100000002 /* AQDataPulse */ = {
+			isa = PBXGroup;
+			children = (
+				A20000010000000100000001 /* AQDataPulseApp.swift */,
+				A20000010000000100000002 /* ContentView.swift */,
+				B20000010000000100000008 /* Info.plist */,
+				B20000010000000100000007 /* PrivacyInfo.xcprivacy */,
+				A40000010000000100000004 /* Models */,
+				A40000010000000100000005 /* ViewModels */,
+				A40000010000000100000006 /* Services */,
+				A40000010000000100000007 /* Theme */,
+				A40000010000000100000008 /* Views */,
+				A40000010000000100000009 /* Resources */,
+			);
+			path = AQDataPulse;
+			sourceTree = "<group>";
+		};
+		A40000010000000100000003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A2000001000000010000000F /* AQDataPulse.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A40000010000000100000004 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A20000010000000100000003 /* HealthStatus.swift */,
+				A20000010000000100000004 /* DataModels.swift */,
+				B20000010000000100000001 /* ConnectionState.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A40000010000000100000005 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				A20000010000000100000005 /* AppViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		A40000010000000100000006 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A20000010000000100000006 /* MockDataService.swift */,
+				B20000010000000100000002 /* MicrosoftAuthConfig.swift */,
+				B20000010000000100000003 /* KeychainStore.swift */,
+				B20000010000000100000004 /* MicrosoftAuthService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A40000010000000100000007 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				A20000010000000100000007 /* Components.swift */,
+				B20000010000000100000006 /* AppInfo.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		A40000010000000100000008 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A20000010000000100000008 /* DashboardView.swift */,
+				A20000010000000100000009 /* WorkspacesView.swift */,
+				A2000001000000010000000A /* AlertsView.swift */,
+				A2000001000000010000000B /* ModelDetailView.swift */,
+				A2000001000000010000000C /* PricingView.swift */,
+				A2000001000000010000000D /* SettingsView.swift */,
+				B20000010000000100000005 /* ConnectMicrosoftView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A40000010000000100000009 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A2000001000000010000000E /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A50000010000000100000001 /* AQDataPulse */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A70000010000000100000003 /* Build configuration list for PBXNativeTarget "AQDataPulse" */;
+			buildPhases = (
+				A60000010000000100000001 /* Sources */,
+				A30000010000000100000001 /* Frameworks */,
+				A60000010000000100000002 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AQDataPulse;
+			productName = AQDataPulse;
+			productReference = A2000001000000010000000F /* AQDataPulse.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A80000010000000100000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					A50000010000000100000001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = A70000010000000100000001 /* Build configuration list for PBXProject "AQDataPulse" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A40000010000000100000001;
+			productRefGroup = A40000010000000100000003 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A50000010000000100000001 /* AQDataPulse */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A60000010000000100000002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1000001000000010000000E /* Assets.xcassets in Resources */,
+				B10000010000000100000007 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A60000010000000100000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000010000000100000001 /* AQDataPulseApp.swift in Sources */,
+				A10000010000000100000002 /* ContentView.swift in Sources */,
+				A10000010000000100000003 /* HealthStatus.swift in Sources */,
+				A10000010000000100000004 /* DataModels.swift in Sources */,
+				A10000010000000100000005 /* AppViewModel.swift in Sources */,
+				A10000010000000100000006 /* MockDataService.swift in Sources */,
+				A10000010000000100000007 /* Components.swift in Sources */,
+				A10000010000000100000008 /* DashboardView.swift in Sources */,
+				A10000010000000100000009 /* WorkspacesView.swift in Sources */,
+				A1000001000000010000000A /* AlertsView.swift in Sources */,
+				A1000001000000010000000B /* ModelDetailView.swift in Sources */,
+				A1000001000000010000000C /* PricingView.swift in Sources */,
+				A1000001000000010000000D /* SettingsView.swift in Sources */,
+				B10000010000000100000001 /* ConnectionState.swift in Sources */,
+				B10000010000000100000002 /* MicrosoftAuthConfig.swift in Sources */,
+				B10000010000000100000003 /* KeychainStore.swift in Sources */,
+				B10000010000000100000004 /* MicrosoftAuthService.swift in Sources */,
+				B10000010000000100000005 /* ConnectMicrosoftView.swift in Sources */,
+				B10000010000000100000006 /* AppInfo.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A90000010000000100000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A90000010000000100000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A90000010000000100000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AQDataPulse/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "AQ Data Pulse";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aureaquantra.datapulse;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A90000010000000100000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AQDataPulse/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "AQ Data Pulse";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aureaquantra.datapulse;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A70000010000000100000001 /* Build configuration list for PBXProject "AQDataPulse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A90000010000000100000001 /* Debug */,
+				A90000010000000100000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A70000010000000100000003 /* Build configuration list for PBXNativeTarget "AQDataPulse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A90000010000000100000003 /* Debug */,
+				A90000010000000100000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A80000010000000100000001 /* Project object */;
+}
