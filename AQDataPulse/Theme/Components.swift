@@ -22,6 +22,7 @@ struct MetricCard: View {
                 Image(systemName: icon)
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(accent)
+                    .accessibilityHidden(true)
                 Spacer()
             }
 
@@ -39,6 +40,8 @@ struct MetricCard: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(AppTheme.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: AppTheme.cornerRadius))
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(title), \(value)")
     }
 }
 
@@ -65,6 +68,7 @@ struct HealthScoreRing: View {
         ZStack {
             Circle()
                 .stroke(Color.secondary.opacity(0.15), lineWidth: 12)
+                .accessibilityHidden(true)
 
             Circle()
                 .trim(from: 0, to: CGFloat(score) / 100)
@@ -73,17 +77,23 @@ struct HealthScoreRing: View {
                     style: StrokeStyle(lineWidth: 12, lineCap: .round)
                 )
                 .rotationEffect(.degrees(-90))
-                .animation(.easeInOut(duration: 0.8), value: score)
+                .animationIfAllowed(.easeInOut(duration: 0.8), value: score)
+                .accessibilityHidden(true)
 
             VStack(spacing: 2) {
                 Text("\(score)")
-                    .font(.system(size: 36, weight: .bold, design: .rounded))
+                    .font(.largeTitle.weight(.bold))
+                    .accessibilityHidden(true)
                 Text("Health")
                     .font(.caption)
                     .foregroundStyle(.secondary)
+                    .accessibilityHidden(true)
             }
         }
         .frame(width: 120, height: 120)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Overall health score")
+        .accessibilityValue("\(score) out of 100, \(status.label)")
     }
 }
 
@@ -127,6 +137,9 @@ struct SimpleLineChart: View {
             }
         }
         .frame(height: 80)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("7-day health trend")
+        .accessibilityValue(AccessibilityHelpers.trendSummary(values: values))
     }
 }
 
@@ -172,6 +185,8 @@ struct DemoBanner: View {
         .padding(.vertical, 8)
         .background(bannerColor.opacity(0.1))
         .clipShape(RoundedRectangle(cornerRadius: 10))
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(bannerText)
     }
 
     private var bannerIcon: String {
@@ -208,5 +223,7 @@ struct BetaSignupButton: View {
             .foregroundStyle(.white)
             .clipShape(RoundedRectangle(cornerRadius: AppTheme.cornerRadius))
         }
+        .accessibilityLabel("Request Beta Access")
+        .accessibilityHint("Opens Mail to request beta access")
     }
 }

@@ -29,6 +29,7 @@
 		B10000010000000100000006 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000010000000100000006 /* AppInfo.swift */; };
 		B10000010000000100000007 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B20000010000000100000007 /* PrivacyInfo.xcprivacy */; };
 		B10000010000000100000009 /* PowerBIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000010000000100000009 /* PowerBIService.swift */; };
+		B1000001000000010000000A /* AccessibilityHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2000001000000010000000A /* AccessibilityHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		B20000010000000100000007 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		B20000010000000100000008 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B20000010000000100000009 /* PowerBIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerBIService.swift; sourceTree = "<group>"; };
+		B2000001000000010000000A /* AccessibilityHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 			children = (
 				A20000010000000100000007 /* Components.swift */,
 				B20000010000000100000006 /* AppInfo.swift */,
+				B2000001000000010000000A /* AccessibilityHelpers.swift */,
 			);
 			path = Theme;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				B10000010000000100000005 /* ConnectMicrosoftView.swift in Sources */,
 				B10000010000000100000006 /* AppInfo.swift in Sources */,
 				B10000010000000100000009 /* PowerBIService.swift in Sources */,
+				B1000001000000010000000A /* AccessibilityHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,7 +373,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -400,7 +404,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;

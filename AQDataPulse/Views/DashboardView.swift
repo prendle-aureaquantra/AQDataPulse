@@ -18,6 +18,8 @@ struct DashboardView: View {
                             .font(.caption)
                             .foregroundStyle(.red)
                             .frame(maxWidth: .infinity, alignment: .leading)
+                            .accessibilityLabel("Sync error")
+                            .accessibilityValue(syncError)
                     }
 
                     healthOverviewCard

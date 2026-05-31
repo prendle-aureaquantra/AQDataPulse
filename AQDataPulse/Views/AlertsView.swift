@@ -2,6 +2,7 @@ import SwiftUI
 
 struct AlertsView: View {
     @EnvironmentObject private var viewModel: AppViewModel
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         NavigationStack {
@@ -22,8 +23,12 @@ struct AlertsView: View {
                     List {
                         ForEach(viewModel.filteredAlerts) { alert in
                             AlertRowView(alert: alert, showResolve: true) {
-                                withAnimation {
+                                if reduceMotion {
                                     viewModel.resolveAlert(alert)
+                                } else {
+                                    withAnimation {
+                                        viewModel.resolveAlert(alert)
+                                    }
                                 }
                             }
                             .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
@@ -41,8 +46,12 @@ struct AlertsView: View {
             HStack(spacing: 8) {
                 ForEach(AlertFilter.allCases) { filter in
                     Button {
-                        withAnimation(.easeInOut(duration: 0.2)) {
+                        if reduceMotion {
                             viewModel.alertFilter = filter
+                        } else {
+                            withAnimation(.easeInOut(duration: 0.2)) {
+                                viewModel.alertFilter = filter
+                            }
                         }
                     } label: {
                         Text(filter.rawValue)
@@ -53,6 +62,7 @@ struct AlertsView: View {
                             .foregroundStyle(viewModel.alertFilter == filter ? .white : .primary)
                             .clipShape(Capsule())
                     }
+                    .accessibilityAddTraits(viewModel.alertFilter == filter ? .isSelected : [])
                 }
             }
             .padding(.horizontal)
@@ -65,8 +75,9 @@ struct AlertsView: View {
         VStack(spacing: 12) {
             Spacer()
             Image(systemName: "checkmark.seal.fill")
-                .font(.system(size: 48))
+                .font(.largeTitle)
                 .foregroundStyle(.green)
+                .accessibilityHidden(true)
             Text("No alerts match this filter")
                 .font(.headline)
             Text("Try selecting a different filter to view alerts.")
@@ -92,6 +103,7 @@ struct AlertRowView: View {
                 Image(systemName: alert.type.icon)
                     .foregroundStyle(alert.type.color)
                     .font(.title3)
+                    .accessibilityHidden(true)
 
                 VStack(alignment: .leading, spacing: 4) {
                     HStack {
@@ -140,12 +152,15 @@ struct AlertRowView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                 }
                 .buttonStyle(.plain)
+                .accessibilityLabel("Resolve alert")
+                .accessibilityHint(alert.title)
             }
         }
         .padding(AppTheme.cardPadding)
         .background(AppTheme.cardBackground)
         .clipShape(RoundedRectangle(cornerRadius: AppTheme.cornerRadius))
         .opacity(alert.isResolved ? 0.7 : 1)
+        .accessibilityElement(children: .contain)
     }
 }
 
