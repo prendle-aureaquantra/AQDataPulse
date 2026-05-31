@@ -150,20 +150,47 @@ struct SectionHeader: View {
 
 struct DemoBanner: View {
     var isDemoMode: Bool = true
+    var isLiveData: Bool = false
+    var isSyncing: Bool = false
 
     var body: some View {
         HStack(spacing: 8) {
-            Image(systemName: isDemoMode ? "play.circle.fill" : "link.circle.fill")
-                .foregroundStyle(isDemoMode ? AppTheme.brandSecondary : .green)
-            Text(isDemoMode ? "Demo Mode — Sample data shown" : "Connected — Live sync coming in v2")
+            if isSyncing {
+                ProgressView()
+                    .controlSize(.small)
+            } else {
+                Image(systemName: bannerIcon)
+                    .foregroundStyle(bannerColor)
+            }
+
+            Text(bannerText)
                 .font(.caption.weight(.medium))
                 .foregroundStyle(.secondary)
             Spacer()
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 8)
-        .background((isDemoMode ? AppTheme.brandSecondary : Color.green).opacity(0.1))
+        .background(bannerColor.opacity(0.1))
         .clipShape(RoundedRectangle(cornerRadius: 10))
+    }
+
+    private var bannerIcon: String {
+        if isLiveData { return "link.circle.fill" }
+        if isDemoMode { return "play.circle.fill" }
+        return "arrow.triangle.2.circlepath"
+    }
+
+    private var bannerColor: Color {
+        if isLiveData { return .green }
+        if isDemoMode { return AppTheme.brandSecondary }
+        return .orange
+    }
+
+    private var bannerText: String {
+        if isSyncing { return "Syncing live data from Power BI…" }
+        if isLiveData { return "Live data from Power BI" }
+        if isDemoMode { return "Demo Mode — Sample data shown" }
+        return "Connected — Pull to refresh for live data"
     }
 }
 

@@ -65,11 +65,11 @@ struct ConnectMicrosoftView: View {
             }
 
             Section("Version 2 Preview") {
-                Label("Live workspace sync", systemImage: "arrow.triangle.2.circlepath")
-                Label("Failed refresh alerts", systemImage: "bell.badge")
+                Label("Live workspace sync", systemImage: viewModel.isLiveData ? "checkmark.circle.fill" : "arrow.triangle.2.circlepath")
+                Label("Failed refresh alerts", systemImage: viewModel.isLiveData ? "checkmark.circle.fill" : "bell.badge")
                 Label("Push notifications", systemImage: "iphone.and.arrow.forward")
             }
-            .foregroundStyle(.secondary)
+            .foregroundStyle(viewModel.isLiveData ? .primary : .secondary)
         }
         .navigationTitle("Connect Microsoft")
         .navigationBarTitleDisplayMode(.inline)

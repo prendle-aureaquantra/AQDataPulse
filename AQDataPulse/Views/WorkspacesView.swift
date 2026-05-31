@@ -7,7 +7,11 @@ struct WorkspacesView: View {
         NavigationStack {
             List {
                 Section {
-                    DemoBanner(isDemoMode: viewModel.isDemoMode)
+                    DemoBanner(
+                        isDemoMode: viewModel.isDemoMode,
+                        isLiveData: viewModel.isLiveData,
+                        isSyncing: viewModel.isSyncing
+                    )
                         .listRowInsets(EdgeInsets())
                         .listRowBackground(Color.clear)
                 }

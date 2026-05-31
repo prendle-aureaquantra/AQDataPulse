@@ -7,9 +7,13 @@ final class AppViewModel: ObservableObject {
     @Published private(set) var workspaces: [Workspace]
     @Published private(set) var alerts: [PulseAlert]
     @Published var alertFilter: AlertFilter = .all
+    @Published private(set) var isSyncing = false
+    @Published private(set) var lastLiveSync: Date?
+    @Published var syncError: String?
 
     let pricingTiers: [PricingTier]
     private let microsoftAuth: MicrosoftAuthService
+    private var resolvedAlertKeys: Set<String> = []
     private var cancellables = Set<AnyCancellable>()
 
     init(microsoftAuth: MicrosoftAuthService = .shared) {
@@ -21,6 +25,10 @@ final class AppViewModel: ObservableObject {
         microsoftAuth.objectWillChange
             .sink { [weak self] _ in self?.objectWillChange.send() }
             .store(in: &cancellables)
+
+        if microsoftAuth.connectionState.isConnected {
+            Task { await refreshDashboard() }
+        }
     }
 
     var connectionState: ConnectionState {
@@ -31,8 +39,16 @@ final class AppViewModel: ObservableObject {
         !connectionState.isConnected
     }
 
+    var isLiveData: Bool {
+        connectionState.isConnected && lastLiveSync != nil
+    }
+
     var dashboardMetrics: DashboardMetrics {
-        MockDataService.dashboardMetrics(from: workspaces, alerts: alerts)
+        MockDataService.dashboardMetrics(
+            from: workspaces,
+            alerts: alerts,
+            lastSync: lastLiveSync ?? MockDataService.lastSync
+        )
     }
 
     var filteredAlerts: [PulseAlert] {
@@ -55,6 +71,12 @@ final class AppViewModel: ObservableObject {
     }
 
     func resolveAlert(_ alert: PulseAlert) {
+        let key = PulseAlert.stableKey(
+            workspaceName: alert.workspaceName,
+            modelName: alert.modelName,
+            type: alert.type
+        )
+        resolvedAlertKeys.insert(key)
         guard let index = alerts.firstIndex(where: { $0.id == alert.id }) else { return }
         alerts[index].isResolved = true
     }
@@ -68,15 +90,54 @@ final class AppViewModel: ObservableObject {
     }
 
     func signInMicrosoft() async {
+        syncError = nil
         await microsoftAuth.signIn()
+        if connectionState.isConnected {
+            await refreshDashboard()
+        }
     }
 
     func signOutMicrosoft() {
         microsoftAuth.signOut()
+        resetToDemoData()
     }
 
     func refreshDashboard() async {
-        try? await Task.sleep(for: .milliseconds(600))
+        guard connectionState.isConnected else { return }
+
+        isSyncing = true
+        syncError = nil
+        defer { isSyncing = false }
+
+        do {
+            let snapshot = try await PowerBIService.shared.fetchMonitoringSnapshot()
+            workspaces = snapshot.workspaces
+            alerts = applyResolvedState(to: snapshot.alerts)
+            lastLiveSync = snapshot.lastSync
+        } catch {
+            syncError = error.localizedDescription
+        }
+    }
+
+    private func applyResolvedState(to alerts: [PulseAlert]) -> [PulseAlert] {
+        alerts.map { alert in
+            var updated = alert
+            let key = PulseAlert.stableKey(
+                workspaceName: alert.workspaceName,
+                modelName: alert.modelName,
+                type: alert.type
+            )
+            updated.isResolved = resolvedAlertKeys.contains(key)
+            return updated
+        }
+    }
+
+    private func resetToDemoData() {
+        workspaces = MockDataService.workspaces
+        alerts = MockDataService.alerts
+        resolvedAlertKeys.removeAll()
+        lastLiveSync = nil
+        syncError = nil
     }
 }
 

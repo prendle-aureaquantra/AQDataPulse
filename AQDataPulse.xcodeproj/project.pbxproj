@@ -27,6 +27,7 @@
 		B10000010000000100000004 /* MicrosoftAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000010000000100000004 /* MicrosoftAuthService.swift */; };
 		B10000010000000100000005 /* ConnectMicrosoftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000010000000100000005 /* ConnectMicrosoftView.swift */; };
 		B10000010000000100000006 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000010000000100000006 /* AppInfo.swift */; };
+		B10000010000000100000009 /* PowerBIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000010000000100000009 /* PowerBIService.swift */; };
 		B10000010000000100000007 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B20000010000000100000007 /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +55,7 @@
 		B20000010000000100000006 /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
 		B20000010000000100000007 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		B20000010000000100000008 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B20000010000000100000009 /* PowerBIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerBIService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 				B20000010000000100000002 /* MicrosoftAuthConfig.swift */,
 				B20000010000000100000003 /* KeychainStore.swift */,
 				B20000010000000100000004 /* MicrosoftAuthService.swift */,
+				B20000010000000100000009 /* PowerBIService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 				B10000010000000100000004 /* MicrosoftAuthService.swift in Sources */,
 				B10000010000000100000005 /* ConnectMicrosoftView.swift in Sources */,
 				B10000010000000100000006 /* AppInfo.swift in Sources */,
+				B10000010000000100000009 /* PowerBIService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,7 +313,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -325,7 +329,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.aureaquantra.datapulse;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -340,7 +344,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -356,7 +360,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.aureaquantra.datapulse;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -7,7 +7,18 @@ struct DashboardView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
-                    DemoBanner(isDemoMode: viewModel.isDemoMode)
+                    DemoBanner(
+                        isDemoMode: viewModel.isDemoMode,
+                        isLiveData: viewModel.isLiveData,
+                        isSyncing: viewModel.isSyncing
+                    )
+
+                    if let syncError = viewModel.syncError {
+                        Text(syncError)
+                            .font(.caption)
+                            .foregroundStyle(.red)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
 
                     healthOverviewCard
 

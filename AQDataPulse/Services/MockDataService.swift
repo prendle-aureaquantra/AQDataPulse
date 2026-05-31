@@ -261,7 +261,11 @@ enum MockDataService {
         )
     ]
 
-    static func dashboardMetrics(from workspaces: [Workspace], alerts: [PulseAlert]) -> DashboardMetrics {
+    static func dashboardMetrics(
+        from workspaces: [Workspace],
+        alerts: [PulseAlert],
+        lastSync: Date = lastSync
+    ) -> DashboardMetrics {
         let totalModels = workspaces.flatMap(\.semanticModels).count
         let failed = workspaces.flatMap(\.semanticModels).filter { $0.refreshStatus == .failed }.count
         let warnings = alerts.filter { !$0.isResolved && $0.severity != .critical }.count

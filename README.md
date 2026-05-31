@@ -4,7 +4,7 @@
 
 AQ Data Pulse is a mobile-first monitoring application from Aurea Quantra designed to provide visibility into Microsoft Fabric and Power BI environments.
 
-Version 1 delivers a polished App Store presence using realistic demo data and lead generation for beta customers.
+Version 1.1 delivers live Power BI workspace sync when signed in, plus Microsoft OAuth and App Store release prep.
 
 ## Requirements
 
@@ -28,7 +28,7 @@ Version 1 delivers a polished App Store presence using realistic demo data and l
 
 - **Platform:** SwiftUI, iOS 17+
 - **Pattern:** MVVM
-- **Data:** Local mock data (no backend, database, or login)
+- **Data:** Demo data when signed out; live Power BI sync when connected
 - **State:** SwiftUI `@Published` properties; resolved alerts persist for the current session
 
 ## Features (v1)

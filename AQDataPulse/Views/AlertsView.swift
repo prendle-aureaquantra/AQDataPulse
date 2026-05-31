@@ -6,7 +6,11 @@ struct AlertsView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                DemoBanner(isDemoMode: viewModel.isDemoMode)
+                DemoBanner(
+                    isDemoMode: viewModel.isDemoMode,
+                    isLiveData: viewModel.isLiveData,
+                    isSyncing: viewModel.isSyncing
+                )
                     .padding(.horizontal)
                     .padding(.top, 8)
 

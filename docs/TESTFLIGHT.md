@@ -66,7 +66,7 @@ Tell App Review:
 
 ## Before each release
 
-- [ ] Bump `MARKETING_VERSION` / `CURRENT_PROJECT_VERSION` in Xcode
+- [ ] Bump `MARKETING_VERSION` / `CURRENT_PROJECT_VERSION` in Xcode (current: **1.1** / **2**)
 - [ ] Verify app icon appears on home screen
 - [ ] Run on a physical device
 - [ ] Update privacy policy if data collection changes
