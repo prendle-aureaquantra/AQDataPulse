@@ -4,7 +4,8 @@
 
 1. Enroll in the [Apple Developer Program](https://developer.apple.com/programs/) ($99/year).
 2. Sign in to Xcode with your Apple ID: **Xcode → Settings → Accounts**.
-3. Create the app record in [App Store Connect](https://appstoreconnect.apple.com/) using bundle ID `com.aureaquantra.datapulse`.
+3. In Xcode, open the project → **AQDataPulse** target → **Signing & Capabilities** → select your **Team** (required for archive/upload).
+4. Create the app record in [App Store Connect](https://appstoreconnect.apple.com/) using bundle ID `com.aureaquantra.datapulse`.
 
 ## App metadata
 
