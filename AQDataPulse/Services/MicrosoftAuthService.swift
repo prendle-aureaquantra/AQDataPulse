@@ -70,6 +70,70 @@ final class MicrosoftAuthService: NSObject, ObservableObject {
         connectionState = .disconnected
     }
 
+    /// Returns a valid access token, refreshing when within five minutes of expiry.
+    func validAccessToken() async throws -> String {
+        if let token = KeychainStore.read(account: KeychainStore.Accounts.accessToken),
+           !isAccessTokenExpired(leeway: 300) {
+            return token
+        }
+        return try await refreshAccessToken()
+    }
+
+    func isAccessTokenExpired(leeway: TimeInterval = 0) -> Bool {
+        guard let raw = KeychainStore.read(account: KeychainStore.Accounts.tokenExpiresAt),
+              let expires = TimeInterval(raw) else {
+            return KeychainStore.read(account: KeychainStore.Accounts.accessToken) == nil
+        }
+        return Date().timeIntervalSince1970 >= expires - leeway
+    }
+
+    func refreshAccessToken() async throws -> String {
+        guard let refreshToken = KeychainStore.read(account: KeychainStore.Accounts.refreshToken) else {
+            throw MicrosoftAuthError.sessionExpired
+        }
+        guard let tokenURL = MicrosoftAuthConfig.tokenURL() else {
+            throw MicrosoftAuthError.invalidTokenURL
+        }
+
+        var request = URLRequest(url: tokenURL)
+        request.httpMethod = "POST"
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+
+        let bodyItems = [
+            URLQueryItem(name: "client_id", value: MicrosoftAuthConfig.clientID),
+            URLQueryItem(name: "grant_type", value: "refresh_token"),
+            URLQueryItem(name: "refresh_token", value: refreshToken),
+            URLQueryItem(name: "scope", value: MicrosoftAuthConfig.scopes.joined(separator: " "))
+        ]
+        var bodyComponents = URLComponents()
+        bodyComponents.queryItems = bodyItems
+        request.httpBody = bodyComponents.percentEncodedQuery?.data(using: .utf8)
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+        guard let http = response as? HTTPURLResponse, (200..<300).contains(http.statusCode) else {
+            let message = String(data: data, encoding: .utf8) ?? "Token refresh failed."
+            if (response as? HTTPURLResponse)?.statusCode == 401 {
+                signOut()
+                throw MicrosoftAuthError.sessionExpired
+            }
+            throw MicrosoftAuthError.server(message)
+        }
+
+        let tokenResponse = try JSONDecoder().decode(TokenResponse.self, from: data)
+        try persistTokens(from: tokenResponse)
+        return tokenResponse.accessToken
+    }
+
+    private func persistTokens(from tokenResponse: TokenResponse) throws {
+        try KeychainStore.save(tokenResponse.accessToken, account: KeychainStore.Accounts.accessToken)
+        if let refreshToken = tokenResponse.refreshToken {
+            try KeychainStore.save(refreshToken, account: KeychainStore.Accounts.refreshToken)
+        }
+        let expiresIn = max(tokenResponse.expiresIn ?? 3600, 60)
+        let expiresAt = Date().timeIntervalSince1970 + Double(expiresIn)
+        try KeychainStore.save(String(expiresAt), account: KeychainStore.Accounts.tokenExpiresAt)
+    }
+
     private func restoreSession() {
         guard let name = KeychainStore.read(account: KeychainStore.Accounts.displayName),
               let email = KeychainStore.read(account: KeychainStore.Accounts.email),
@@ -158,10 +222,7 @@ final class MicrosoftAuthService: NSObject, ObservableObject {
         }
 
         let tokenResponse = try JSONDecoder().decode(TokenResponse.self, from: data)
-        try KeychainStore.save(tokenResponse.accessToken, account: KeychainStore.Accounts.accessToken)
-        if let refreshToken = tokenResponse.refreshToken {
-            try KeychainStore.save(refreshToken, account: KeychainStore.Accounts.refreshToken)
-        }
+        try persistTokens(from: tokenResponse)
 
         let profile = profileFromIDToken(tokenResponse.idToken) ?? UserProfile(
             displayName: "Microsoft Account",
@@ -242,11 +303,13 @@ private struct TokenResponse: Decodable {
     let accessToken: String
     let refreshToken: String?
     let idToken: String?
+    let expiresIn: Int?
 
     enum CodingKeys: String, CodingKey {
         case accessToken = "access_token"
         case refreshToken = "refresh_token"
         case idToken = "id_token"
+        case expiresIn = "expires_in"
     }
 }
 
@@ -262,10 +325,13 @@ enum MicrosoftAuthError: LocalizedError {
     case missingAuthorizationCode
     case missingCodeVerifier
     case invalidTokenURL
+    case sessionExpired
     case server(String)
 
     var errorDescription: String? {
         switch self {
+        case .sessionExpired:
+            return "Microsoft session expired. Please sign in again."
         case .userCancelled:
             return "Sign-in was cancelled."
         case .missingCallback:

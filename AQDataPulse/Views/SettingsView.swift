@@ -17,6 +17,14 @@ struct SettingsView: View {
                     }
                 }
 
+                Section("Data Pulse API") {
+                    NavigationLink {
+                        BackendSettingsView()
+                    } label: {
+                        Label("Backend URL", systemImage: "server.rack")
+                    }
+                }
+
                 Section("Connect") {
                     NavigationLink {
                         ConnectMicrosoftView()

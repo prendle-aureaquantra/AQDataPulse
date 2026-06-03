@@ -53,6 +53,7 @@ enum KeychainStore {
     static func clearAuth() {
         delete(account: Accounts.accessToken)
         delete(account: Accounts.refreshToken)
+        delete(account: Accounts.tokenExpiresAt)
         delete(account: Accounts.displayName)
         delete(account: Accounts.email)
     }
@@ -60,6 +61,7 @@ enum KeychainStore {
     enum Accounts {
         static let accessToken = "accessToken"
         static let refreshToken = "refreshToken"
+        static let tokenExpiresAt = "tokenExpiresAt"
         static let displayName = "displayName"
         static let email = "email"
     }

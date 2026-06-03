@@ -94,6 +94,8 @@ final class AppViewModel: ObservableObject {
         await microsoftAuth.signIn()
         if connectionState.isConnected {
             await refreshDashboard()
+            await PushNotificationService.shared.requestAuthorizationAndRegister()
+            BackgroundRefreshManager.schedule()
         }
     }
 
@@ -114,6 +116,7 @@ final class AppViewModel: ObservableObject {
             workspaces = snapshot.workspaces
             alerts = applyResolvedState(to: snapshot.alerts)
             lastLiveSync = snapshot.lastSync
+            await reportCriticalAlertsToBackend(snapshot.alerts)
         } catch {
             syncError = error.localizedDescription
         }
@@ -129,6 +132,23 @@ final class AppViewModel: ObservableObject {
             )
             updated.isResolved = resolvedAlertKeys.contains(key)
             return updated
+        }
+    }
+
+    private func reportCriticalAlertsToBackend(_ alerts: [PulseAlert]) async {
+        for alert in alerts where !alert.isResolved && alert.severity == .critical {
+            guard let workspace = workspaces.first(where: { $0.name == alert.workspaceName }),
+                  let model = workspace.semanticModels.first(where: { $0.name == alert.modelName }) else {
+                continue
+            }
+            try? await DataPulseAPIClient.shared.reportAlert(
+                workspaceId: workspace.id.uuidString,
+                workspaceName: alert.workspaceName,
+                datasetId: model.id.uuidString,
+                datasetName: alert.modelName,
+                alertType: alert.type.rawValue,
+                severity: alert.severity.rawValue
+            )
         }
     }
 

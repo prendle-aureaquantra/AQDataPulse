@@ -1,6 +1,6 @@
 # Microsoft OAuth Setup
 
-AQ Data Pulse uses the Microsoft identity platform with PKCE (`ASWebAuthenticationSession`) for sign-in. Live Fabric data sync arrives in v2; v1 stores tokens securely for future API calls.
+AQ Data Pulse uses the Microsoft identity platform with PKCE (`ASWebAuthenticationSession`) for sign-in. **v2** adds automatic token refresh, background sync, push registration to `datapulse_api`, and live Power BI workspace sync when connected.
 
 ## 1. Register an Azure app
 
@@ -77,8 +77,14 @@ Replace `YOUR_AZURE_CLIENT_ID` with the value from Azure.
 
 Access and refresh tokens are stored in the iOS Keychain via `KeychainStore`. **Disconnect** clears all auth material.
 
-## v2 next steps
+## v2 behavior (implemented)
 
-- Call Power BI REST / Fabric APIs using stored tokens
-- Refresh tokens before expiry
-- Replace `MockDataService` data with live workspace sync
+- **Live sync:** `PowerBIService` loads workspaces and refresh history when signed in; demo data when signed out.
+- **Token refresh:** `MicrosoftAuthService.validAccessToken()` refreshes using the Keychain refresh token before expiry.
+- **Background sync:** `BGAppRefreshTask` (`com.aureaquantra.datapulse.refresh`) schedules periodic refresh.
+- **Push:** Device token registered at `POST /api/v1/devices/register` on the Data Pulse API (see Settings → Backend URL).
+- **Android:** Same scopes via MSAL in `android/DataPulse/`; add matching redirect URIs in Azure for the Android package.
+
+## Backend URL (optional)
+
+Default in Info.plist: `http://127.0.0.1:8020`. Override in **Settings → Backend URL** for staging or production (`datapulse.aureaquantra.com`).

@@ -4,7 +4,7 @@
 
 AQ Data Pulse is a mobile-first monitoring application from Aurea Quantra designed to provide visibility into Microsoft Fabric and Power BI environments.
 
-Version 1.1 delivers live Power BI workspace sync when signed in, plus Microsoft OAuth and App Store release prep.
+Version 2.0 delivers live Power BI sync, token refresh, background sync, push registration via `datapulse_api`, and optional Android client.
 
 ## Requirements
 
@@ -21,6 +21,7 @@ Version 1.1 delivers live Power BI workspace sync when signed in, plus Microsoft
 ## Release & integration
 
 - TestFlight checklist: [docs/TESTFLIGHT.md](docs/TESTFLIGHT.md)
+- GitHub Actions TestFlight: [docs/GITHUB_ACTIONS_IOS.md](docs/GITHUB_ACTIONS_IOS.md)
 - Microsoft OAuth setup: [docs/MICROSOFT_AUTH_SETUP.md](docs/MICROSOFT_AUTH_SETUP.md)
 - Screenshot script: `./scripts/capture-screenshots.sh`
 
@@ -81,7 +82,7 @@ Tap **Request Beta Access** to send an email to therendle@gmail.com.
 
 ## Roadmap
 
-- **v2:** Microsoft Fabric OAuth, live monitoring, push notifications
+- **v2:** Token refresh, background sync, push + `datapulse_api`, Android app, Fastlane CI
 - **v3:** Databricks, Snowflake, Tableau, and additional connectors
 
 Built by [Aurea Quantra](mailto:therendle@gmail.com).

@@ -30,6 +30,13 @@
 		B10000010000000100000007 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B20000010000000100000007 /* PrivacyInfo.xcprivacy */; };
 		B10000010000000100000009 /* PowerBIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000010000000100000009 /* PowerBIService.swift */; };
 		B1000001000000010000000A /* AccessibilityHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2000001000000010000000A /* AccessibilityHelpers.swift */; };
+		C10000010000000100000001 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000010000000100000001 /* AppDelegate.swift */; };
+		C10000010000000100000002 /* ClientIdStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000010000000100000002 /* ClientIdStore.swift */; };
+		C10000010000000100000003 /* DataPulseAPIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000010000000100000003 /* DataPulseAPIConfig.swift */; };
+		C10000010000000100000004 /* DataPulseAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000010000000100000004 /* DataPulseAPIClient.swift */; };
+		C10000010000000100000005 /* PushNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000010000000100000005 /* PushNotificationService.swift */; };
+		C10000010000000100000006 /* BackgroundRefreshManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000010000000100000006 /* BackgroundRefreshManager.swift */; };
+		C10000010000000100000007 /* BackendSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000010000000100000007 /* BackendSettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +65,14 @@
 		B20000010000000100000008 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B20000010000000100000009 /* PowerBIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerBIService.swift; sourceTree = "<group>"; };
 		B2000001000000010000000A /* AccessibilityHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityHelpers.swift; sourceTree = "<group>"; };
+		C20000010000000100000001 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C20000010000000100000002 /* ClientIdStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientIdStore.swift; sourceTree = "<group>"; };
+		C20000010000000100000003 /* DataPulseAPIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPulseAPIConfig.swift; sourceTree = "<group>"; };
+		C20000010000000100000004 /* DataPulseAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPulseAPIClient.swift; sourceTree = "<group>"; };
+		C20000010000000100000005 /* PushNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationService.swift; sourceTree = "<group>"; };
+		C20000010000000100000006 /* BackgroundRefreshManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundRefreshManager.swift; sourceTree = "<group>"; };
+		C20000010000000100000007 /* AQDataPulse.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AQDataPulse.entitlements; sourceTree = "<group>"; };
+		C20000010000000100000008 /* BackendSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendSettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +100,9 @@
 				A20000010000000100000001 /* AQDataPulseApp.swift */,
 				A20000010000000100000002 /* ContentView.swift */,
 				B20000010000000100000008 /* Info.plist */,
+				C20000010000000100000007 /* AQDataPulse.entitlements */,
 				B20000010000000100000007 /* PrivacyInfo.xcprivacy */,
+				C20000010000000100000001 /* AppDelegate.swift */,
 				A40000010000000100000004 /* Models */,
 				A40000010000000100000005 /* ViewModels */,
 				A40000010000000100000006 /* Services */,
@@ -130,6 +147,11 @@
 				B20000010000000100000003 /* KeychainStore.swift */,
 				B20000010000000100000004 /* MicrosoftAuthService.swift */,
 				B20000010000000100000009 /* PowerBIService.swift */,
+				C20000010000000100000002 /* ClientIdStore.swift */,
+				C20000010000000100000003 /* DataPulseAPIConfig.swift */,
+				C20000010000000100000004 /* DataPulseAPIClient.swift */,
+				C20000010000000100000005 /* PushNotificationService.swift */,
+				C20000010000000100000006 /* BackgroundRefreshManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -154,6 +176,7 @@
 				A2000001000000010000000C /* PricingView.swift */,
 				A2000001000000010000000D /* SettingsView.swift */,
 				B20000010000000100000005 /* ConnectMicrosoftView.swift */,
+				C20000010000000100000008 /* BackendSettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -257,6 +280,13 @@
 				B10000010000000100000006 /* AppInfo.swift in Sources */,
 				B10000010000000100000009 /* PowerBIService.swift in Sources */,
 				B1000001000000010000000A /* AccessibilityHelpers.swift in Sources */,
+				C10000010000000100000001 /* AppDelegate.swift in Sources */,
+				C10000010000000100000002 /* ClientIdStore.swift in Sources */,
+				C10000010000000100000003 /* DataPulseAPIConfig.swift in Sources */,
+				C10000010000000100000004 /* DataPulseAPIClient.swift in Sources */,
+				C10000010000000100000005 /* PushNotificationService.swift in Sources */,
+				C10000010000000100000006 /* BackgroundRefreshManager.swift in Sources */,
+				C10000010000000100000007 /* BackendSettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,6 +402,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = AQDataPulse/AQDataPulse.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "";
@@ -389,7 +420,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.aureaquantra.datapulse;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -403,6 +434,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = AQDataPulse/AQDataPulse.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "";
@@ -420,7 +452,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.aureaquantra.datapulse;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

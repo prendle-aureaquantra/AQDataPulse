@@ -1,0 +1,112 @@
+# Manual TestFlight upload on macos-latest.
+# Secrets: ASC_KEY_ID, ASC_ISSUER_ID, and ASC_KEY_P8 or ASC_KEY_CONTENT (base64 .p8).
+# Optional: AUREAQUANTRA_GITHUB_TOKEN — only if checkout needs a PAT (same-repo uses GITHUB_TOKEN).
+name: iOS TestFlight
+
+on:
+  workflow_dispatch:
+    inputs:
+      skip_upload:
+        description: "Build only (no TestFlight upload)"
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  verify-api:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Write App Store Connect API key
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
+          ASC_KEY_CONTENT: ${{ secrets.ASC_KEY_CONTENT }}
+        run: |
+          set -euo pipefail
+          if [ -z "${ASC_KEY_ID:-}" ] || [ -z "${ASC_ISSUER_ID:-}" ]; then
+            echo "::error::Add repository secrets ASC_KEY_ID and ASC_ISSUER_ID (App Store Connect API)."
+            exit 1
+          fi
+          KEY_PATH="$RUNNER_TEMP/AuthKey.p8"
+          if [ -n "${ASC_KEY_CONTENT:-}" ]; then
+            echo "$ASC_KEY_CONTENT" | base64 --decode > "$KEY_PATH"
+          elif [ -n "${ASC_KEY_P8:-}" ]; then
+            printf '%s' "$ASC_KEY_P8" > "$KEY_PATH"
+          else
+            echo "::error::Add ASC_KEY_P8 (raw .p8) or ASC_KEY_CONTENT (base64 .p8)."
+            exit 1
+          fi
+          echo "ASC_KEY_PATH=$KEY_PATH" >> "$GITHUB_ENV"
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+          bundler-cache: true
+
+      - name: Fastlane verify_api
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          DEVELOPMENT_TEAM: NRPDWFDP6B
+        run: bundle exec fastlane verify_api
+
+  beta:
+    needs: verify-api
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: |
+          sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+          xcodebuild -version
+
+      - name: Write App Store Connect API key
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
+          ASC_KEY_CONTENT: ${{ secrets.ASC_KEY_CONTENT }}
+        run: |
+          set -euo pipefail
+          if [ -z "${ASC_KEY_ID:-}" ] || [ -z "${ASC_ISSUER_ID:-}" ]; then
+            echo "::error::Add ASC_KEY_ID and ASC_ISSUER_ID repository secrets."
+            exit 1
+          fi
+          KEY_PATH="$RUNNER_TEMP/AuthKey.p8"
+          if [ -n "${ASC_KEY_CONTENT:-}" ]; then
+            echo "$ASC_KEY_CONTENT" | base64 --decode > "$KEY_PATH"
+          elif [ -n "${ASC_KEY_P8:-}" ]; then
+            printf '%s' "$ASC_KEY_P8" > "$KEY_PATH"
+          else
+            echo "::error::Add ASC_KEY_P8 or ASC_KEY_CONTENT."
+            exit 1
+          fi
+          echo "ASC_KEY_PATH=$KEY_PATH" >> "$GITHUB_ENV"
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+          bundler-cache: true
+
+      - name: Fastlane beta
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          DEVELOPMENT_TEAM: NRPDWFDP6B
+          APP_IDENTIFIER: com.aureaquantra.datapulse
+          FL_BUILD_NUMBER: ${{ github.run_number }}
+        run: |
+          if [ "${{ inputs.skip_upload }}" = "true" ]; then
+            bundle exec fastlane build_only
+          else
+            bundle exec fastlane beta
+          fi

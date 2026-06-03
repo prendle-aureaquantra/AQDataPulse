@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ConnectMicrosoftView: View {
     @EnvironmentObject private var viewModel: AppViewModel
+    @EnvironmentObject private var pushService: PushNotificationService
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -12,7 +13,7 @@ struct ConnectMicrosoftView: View {
                         .font(.headline)
                         .foregroundStyle(AppTheme.brandPrimary)
 
-                    Text("Connect your Microsoft account to monitor workspace refresh health with live data in a future release.")
+                    Text("Connect your Microsoft account to monitor workspace refresh health with live Power BI data.")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
@@ -64,12 +65,15 @@ struct ConnectMicrosoftView: View {
                 }
             }
 
-            Section("Version 2 Preview") {
-                Label("Live workspace sync", systemImage: viewModel.isLiveData ? "checkmark.circle.fill" : "arrow.triangle.2.circlepath")
-                Label("Failed refresh alerts", systemImage: viewModel.isLiveData ? "checkmark.circle.fill" : "bell.badge")
-                Label("Push notifications", systemImage: "iphone.and.arrow.forward")
+            Section("v2 capabilities") {
+                Label("Live workspace sync", systemImage: viewModel.isLiveData ? "checkmark.circle.fill" : "circle")
+                Label("Token refresh & background sync", systemImage: viewModel.isLiveData ? "checkmark.circle.fill" : "circle")
+                Label(
+                    "Push notifications",
+                    systemImage: pushService.deviceTokenHex != nil ? "checkmark.circle.fill" : "circle"
+                )
             }
-            .foregroundStyle(viewModel.isLiveData ? .primary : .secondary)
+            .foregroundStyle(.primary)
         }
         .navigationTitle("Connect Microsoft")
         .navigationBarTitleDisplayMode(.inline)

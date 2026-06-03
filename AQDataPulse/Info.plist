@@ -37,6 +37,17 @@
 	<string>public.app-category.business</string>
 	<key>MicrosoftClientID</key>
 	<string>32cba286-b06f-47fe-8037-32aefcac04ea</string>
+	<key>DataPulseAPIBaseURL</key>
+	<string>http://127.0.0.1:8020</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>com.aureaquantra.datapulse.refresh</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

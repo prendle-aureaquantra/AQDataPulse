@@ -11,3 +11,6 @@ xcuserdata/
 *.dSYM.zip
 *.dSYM
 AppStoreScreenshots/
+fastlane/.env
+fastlane/report.xml
+fastlane/test_output/

@@ -40,8 +40,8 @@ actor PowerBIService {
     }
 
     func fetchMonitoringSnapshot() async throws -> MonitoringSnapshot {
-        guard let token = KeychainStore.read(account: KeychainStore.Accounts.accessToken) else {
-            throw PowerBIError.notAuthenticated
+        let token = try await MainActor.run {
+            try await MicrosoftAuthService.shared.validAccessToken()
         }
 
         let groups: [PowerBIGroup] = try await getList("/groups", token: token)
